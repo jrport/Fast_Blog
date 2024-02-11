@@ -1,8 +1,18 @@
 Simple blog using FastAPI and SQLite3 for the backend and Vue.js with Pico.css for the frontend.
 
-Take a look at 
 
-To run the application locally, simply:
+To run the application locally, you can:
+
+### Run the installation script
+- **For linux users**, give the script the necessary privileges
+  `chmod u+x ./run.sh`
+
+- Run the script
+  `sudo ./run.sh`
+
+- Open the [blog](http://127.0.0.1/)
+
+### Manual Docker build
 
 - Clone the project
 

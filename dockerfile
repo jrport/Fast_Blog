@@ -1,14 +1,29 @@
 FROM python:3.11.7-bookworm
+
 WORKDIR /fast_app
 
-COPY ./pyproject.toml .
-COPY ./poetry.lock .
+# Sets env variables for poetry install
+ENV POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_NO_INTERACTION=1
 
-RUN pip install poetry
-RUN poetry config virtualenvs.in-project true
-RUN poetry run python -m pip install --upgrade pip 
-RUN poetry install
+# Install poetry
+RUN <<EOF
+apt-get update
+apt-get install -y --no-install-recommends curl
+curl -sSL https://install.python-poetry.org | python3
+EOF
+
+# Sets necessary dependency registries
+COPY ./pyproject.toml ./poetry.lock ./ ./
+
+# Sets poetry as envvar to call directly
+ENV PATH="${PATH}:${POETRY_HOME}/bin"
+
+# Installs project dependencies
+RUN poetry install --no-root --no-ansi
 
 COPY . .
 
-CMD ["poetry", "run", "uvicorn", "src.fast_pico_vue_blog.main:app", "--host", "0.0.0.0", "--port", "80"]
+# Runs app with uvicorn at localhost:80
+CMD ["poetry", "run", "uvicorn", "src.fast_blog.main:app", "--host", "0.0.0.0", "--port", "80"]
