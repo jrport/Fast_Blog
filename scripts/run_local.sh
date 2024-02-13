@@ -1,2 +1,2 @@
 #! /usr/bin/bash
-poetry run uvicorn src.backend.main:app --host 0.0.0.0 --port 80
+sudo poetry run uvicorn src.backend.routes:app --port 80 --reload

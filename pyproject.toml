@@ -12,6 +12,7 @@ fastapi = "^0.109.2"
 sqlalchemy = "^2.0.25"
 uvicorn = "^0.27.0.post1"
 alembic = "^1.13.1"
+dynaconf = "^3.2.4"
 
 
 [build-system]
