@@ -1,6 +1,6 @@
 from typing import Text
 from sqlalchemy import Column, DateTime, Integer, String, Text
-from src.backend.database.database import Base
+from .database.database import Base
 
 class Post(Base):
     __tablename__ = 'posts'
@@ -8,3 +8,4 @@ class Post(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(50), nullable=False)
     content = Column(Text, nullable=False)
+    created_at = Column(DateTime)
