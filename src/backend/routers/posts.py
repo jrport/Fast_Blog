@@ -11,12 +11,12 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-@router.get("/{page_number}", response_model=list[schemas.Post])
+@router.get("/{page_number}", response_model=dict[int, schemas.Post])
 async def index(page_number: int = 1, limit: int = 10, session: Session = Depends(get_session)):
     posts = await crud.get_all_posts(page_number, limit, session)
     return posts
 
-@router.post("/create_post/", response_model=schemas.Post)
+@router.post("/create_post")
 async def create_post(post: schemas.PostCreate, session: Session = Depends(get_session)):
     new_post = await crud.create_post(post, session)
     return new_post

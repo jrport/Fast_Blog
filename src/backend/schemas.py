@@ -22,7 +22,8 @@ class PostBase(BaseModel):
     created_at: datetime = Field(default=datetime.now(), examples=[datetime.now()])
     
 class PostCreate(PostBase):
-    pass
+    title: str
+    content: str
 
 class Post(PostBase):
     title: str = Field(max_length=50, examples=["Generic Title"])

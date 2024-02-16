@@ -1,15 +1,31 @@
 <script>
-import Header from './Header.vue'
+import Home from './pages/Home.vue'
+import WritePost from './pages/WritePost.vue'
 
-export default {
-  components: {
-    Header 
-  }
+const routes = {
+  '/': Home,
+  '/write': WritePost
 }
+
+  export default {
+    data() {
+      return {
+        currentPath: window.location.pathname
+      }
+    },
+    computed: {
+      currentView() {
+        return routes[this.currentPath.slice(1) || '/'] || NotFound
+      }
+    },
+    mounted() {
+      window.addEventListener('hashchange', () => {
+        this.currentPath = window.location.hash
+      })
+    }
+  }
 </script>
 
-<template >
-  <div class="h-screen shadow-xl bg-gray-900 col-start-2 col-end-8">
-    <Header/>
-  </div>
+<template>
+  <component :is='currentView' />
 </template>

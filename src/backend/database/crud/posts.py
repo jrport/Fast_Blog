@@ -4,8 +4,8 @@ from ... import models, schemas
 
 async def get_all_posts(page_number: int, limit: int, session: Session):
     posts = select(models.Post).where(models.Post.id < page_number*10).limit(limit=limit)
-    return session.scalars(posts).all()
-
+    posts = session.scalars(posts).all() 
+    return {k:v for k,v in enumerate(posts)}
 async def get_post(post_id: int, session: Session) -> models.Post | None:
     post = select(models.Post).where(models.Post.id == post_id)
     return session.scalars(post).one_or_none()
