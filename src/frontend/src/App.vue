@@ -1,6 +1,6 @@
 <script>
-import Home from './pages/Home.vue'
-import WritePost from './pages/WritePost.vue'
+ import Home from './pages/Home.vue'
+ import WritePost from './pages/WritePost.vue'
 
 const routes = {
   '/': Home,
@@ -15,7 +15,7 @@ const routes = {
     },
     computed: {
       currentView() {
-        return routes[this.currentPath.slice(1) || '/'] || NotFound
+        return routes[this.currentPath.slice(1) || '/'] 
       }
     },
     mounted() {

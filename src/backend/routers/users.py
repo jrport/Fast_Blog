@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from backend import schemas
 
-from ..dependencies import get_session
+from backend.dependencies import get_session
 
 router = APIRouter(
     prefix="/users",
