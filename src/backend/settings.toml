@@ -1,0 +1,2 @@
+[database]
+sql_url = "sqlite+pysqlite:///database/blog.db"
